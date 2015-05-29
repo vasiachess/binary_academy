@@ -1,5 +1,5 @@
 // Binary Studio Academy
-// Hometask #1
+// Hometask #1.1
 // student: Vasyl Prokopyshyn
 
 var Man = {
@@ -17,6 +17,7 @@ live: function() {
 
 var Student = Object.create(Man);
 
+
 Student.constructor = function(name, age)
 {
  Man.constructor.apply(this, arguments);
@@ -28,22 +29,23 @@ Student.study = function() {
 };
 
 var sam = Object.create(Student).constructor("Sam", 23);
-var john = Object.create(Man).constructor("Jhon", 45);
+var john = Object.create(Man).constructor("John", 45);
 
 console.log(john.live());
 console.log(sam.study());
 
 var duckType = function(person) {
   if (typeof person.study === "function") { 
-	console.log("type is Student");
-  return Student;
-	} else {
-	console.log("type is Man");
-  return Man;
-	}
+      return Student;
+  } else if (typeof person.live === "function") {
+      return Man;
+  } else {
+    throw "Unsupported type";
+  }	
 };
 
 var v = duckType(sam);
 console.log(v);
 
 duckType(john);
+
