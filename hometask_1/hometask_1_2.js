@@ -11,8 +11,12 @@ constructor: function (name, age) {
 	},
 
 live: function() {
-	return this.name + " is " + this.age + "years old.";
-	}
+	return this.name + " is " + this.age + " years old.";
+	},
+
+duckType: function() {
+    return Man;
+    }
 };
 
 var Student = Object.create(Man);
@@ -27,6 +31,10 @@ Student.study = function() {
 	return this.name + " is a student" ;
 };
 
+Student.duckType = function() {
+	return Student;
+};
+
 var sam = Object.create(Man).constructor("Sam", 45);
 var john = Object.create(Student).constructor("John", 25);
 
@@ -34,5 +42,6 @@ console.log(sam.live());
 console.log(john.study());
 console.log(john.live());
 
-
+console.log(sam.duckType());
+console.log(john.duckType());
 
