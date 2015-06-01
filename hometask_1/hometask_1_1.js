@@ -1,5 +1,5 @@
 // Binary Studio Academy
-// Hometask #1.1
+// Hometask #1.1 - прототипное наследование
 // student: Vasyl Prokopyshyn
 
 var Man = function (name, age)
@@ -9,28 +9,39 @@ var Man = function (name, age)
 }
 
 Man.prototype.live = function() {
-	return this.name + " is " + this.age + "years old.";
+	return this.name + " is " + this.age + " years old.";
 	}
-
-function extend(clazz) {
-
-}
 
 var Student = function(name, age)
 {
    Man.apply(this, arguments);
 }
 
-Student.prototype = extend(Man.prototype);
+Student.prototype = Object.create(Man.prototype);
+//или можно Student.prototype.__proto__ = Man.prototype;  но прямой доступ к __proto__ не поддерживается в IE10
+Student.prototype.constructor = Student;
 
 Student.prototype.study = function ()
 {
   return this.name + " is a student" ;
 }
 
-var sam = new Man("Sam", 25);
-var john = new Student("John", 45);
+var sam = new Man("Sam", 45);
+var john = new Student("John", 25);
 
 console.log(sam.live());
 console.log(john.study());
 console.log(john.live());
+
+var duckType = function(person) {
+  if (typeof person.study === "function") {
+      return Student;
+  } else if (typeof person.live === "function") {
+      return Man;
+  } else {
+    throw "Unsupported type";
+  }
+};
+
+console.log(duckType(sam));
+console.log(duckType(john));

@@ -1,5 +1,5 @@
 // Binary Studio Academy
-// Hometask #1.2
+// Hometask #1.2 - наследование через конструкцию Object.create()
 // student: Vasyl Prokopyshyn
 
 var Man = {
@@ -17,7 +17,6 @@ live: function() {
 
 var Student = Object.create(Man);
 
-
 Student.constructor = function(name, age)
 {
  Man.constructor.apply(this, arguments);
@@ -28,24 +27,12 @@ Student.study = function() {
 	return this.name + " is a student" ;
 };
 
-var sam = Object.create(Student).constructor("Sam", 23);
-var john = Object.create(Man).constructor("John", 45);
+var sam = Object.create(Man).constructor("Sam", 45);
+var john = Object.create(Student).constructor("John", 25);
 
+console.log(sam.live());
+console.log(john.study());
 console.log(john.live());
-console.log(sam.study());
 
-var duckType = function(person) {
-  if (typeof person.study === "function") { 
-      return Student;
-  } else if (typeof person.live === "function") {
-      return Man;
-  } else {
-    throw "Unsupported type";
-  }	
-};
 
-var v = duckType(sam);
-console.log(v);
-
-duckType(john);
 
