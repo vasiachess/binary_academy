@@ -2,8 +2,7 @@
 // Hometask #1.1 - прототипное наследование
 // student: Vasyl Prokopyshyn
 
-var Man = function (name, age)
-{
+var Man = function (name, age) {
   this.name = name;
   this.age = age;
 }
@@ -12,17 +11,13 @@ Man.prototype.live = function() {
 	return this.name + " is " + this.age + " years old.";
 	}
 
-var Student = function(name, age)
-{
+var Student = function(name, age) {
    Man.apply(this, arguments);
 }
 
 Student.prototype = Object.create(Man.prototype);
-//или можно Student.prototype.__proto__ = Man.prototype;  но прямой доступ к __proto__ не поддерживается в IE10
-Student.prototype.constructor = Student;
 
-Student.prototype.study = function ()
-{
+Student.prototype.study = function() {
   return this.name + " is a student" ;
 }
 
