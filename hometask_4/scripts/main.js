@@ -40,20 +40,21 @@ var Application = {};
     Application.onAddGoods = function($baseNode) {
 
         var id = this.nextId();
+            $newGoods = $('<ul id="' + id + '"></ul>');
+
 
         console.log("addGoods id: " + id);
 
-        $baseNode.append($('<ul id="' + id + '"></ul>'));
-        $baseNode.append($('<input type="checkbox" data-goods-id="' + id + '"></input>'));
-        $baseNode.append(inputTxt.value);
-        $baseNode.append($('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>'));
+        $newGoods.append('<input type="checkbox" data-goods-id="' + id + '"></input>');
+        $newGoods.append(inputTxt.value);
+        $newGoods.append('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
+
+        $baseNode.append($newGoods);
 
     };
 
     Application.onDeleteGoods = function(evt) {
-        var goodsContainer = _document.getElementById(evt.target.getAttribute('data-goods-id'));
-
-        goodsContainer.parentNode.removeChild(goodsContainer);
+        $('#' + $(evt.target).attr('data-goods-id')).remove();
     };
 
     Application.proxy = function(hander, owner) {
