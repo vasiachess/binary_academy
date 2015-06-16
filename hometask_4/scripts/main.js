@@ -40,13 +40,13 @@ var Application = {};
     Application.onAddGoods = function($baseNode) {
 
         var id = this.nextId();
-            $newGoods = $('<ul id="' + id + '"></ul>');
-
+            $newGoods = $('<ul id="' + id + '"></ul>'),
+            $inputNew = $('<input data-task-id:"' + id + '"/>').attr({ type: 'text', name:'text', value:inputTxt.value, id:'currentInput'}).prop('disabled', true);
 
         console.log("addGoods id: " + id);
 
         $newGoods.append('<input type="checkbox" data-goods-id="' + id + '"></input>');
-        $newGoods.append(inputTxt.value);
+        $newGoods.append($inputNew);
         $newGoods.append('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
 
         $baseNode.append($newGoods);
