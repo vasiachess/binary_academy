@@ -13,18 +13,28 @@ var Application = {};
         this.addGoodsContainer(_$container);
 
         _$container.click($.proxy(this.containerOnClick, this));
-        $('#clear-container').click($.proxy(this.containerOnClickClear, this));
+        _$container.on ('click', '[data-action="ClearGoods"]', $.proxy(this.onClearGoods, this));
     };
 
     Application.addGoodsContainer = function($baseNode) {
 
-        var id = this.nextId();
+        var id = this.nextId(),
+            input = $('<input type="text" id="inputTxt" data-goods-container-id="' + id + '"></input>');
+
 
         $baseNode.append($('<ul id="' + id + '"></ul>'));
-        $baseNode.append($('<input type="text" id="inputTxt" data-task-container-id="' + id + '"></input>'));
-        $baseNode.append($('<button data-action="AddGoods" data-task-container-id="' + id + '">Add</button>'));
+        $baseNode.append(input);
+        $baseNode.append("   ");
+        $baseNode.append($('<button data-action="ClearGoods" data-goods-container-id="' + id + '">Clear</button>'));
 
+        $('input').keyup(function(e){
 
+            if (e.which === 13) {
+                console.log("Enter");
+                Application.onAddGoods(_$container);
+            }
+
+        });
 
     };
 
@@ -35,33 +45,24 @@ var Application = {};
             switch (evt.target.getAttribute('data-action')) {
                 case "AddGoods": this.onAddGoods(_$container); break;
                 case "DeleteGoods": this.onDeleteGoods(evt); break;
-                //case "Check": this.onCrossOutGoods(evt); break;
-
             }
         }
     };
 
-    Application.containerOnClickClear = function(evt) {
-
-        if (evt.target.hasAttribute('data-action')) {
-
-            switch (evt.target.getAttribute('data-action')) {
-                case "ClearGoods": this.onClearGoods(); break;
-            }
-        }
-    };
 
     Application.onAddGoods = function($baseNode) {
 
         var id = this.nextId();
             $newGoods = $('<ul id="' + id + '"></ul>'),
-            $inputNew = $('<input type="text" data-goods-id:"' + id + '"/>').attr({ value:inputTxt.value, id:'currentInput', readonly:'readonly'});
+            $labelNew = $('<label data-goods-id:"' + id + '"/>'),
             $inputCheckBox =$('<input type="checkbox" data-action="Check" data-goods-id="' + id + '"></input>');
+
+        $labelNew.text(inputTxt.value + " ");
 
         console.log("addGoods id: " + id);
 
         $newGoods.append($inputCheckBox);
-        $newGoods.append($inputNew);
+        $newGoods.append($labelNew);
         $newGoods.append('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
 
         $baseNode.append($newGoods);
@@ -72,29 +73,51 @@ var Application = {};
         $('#' + $(evt.target).attr('data-goods-id')).remove();
     };
 
-    Application.onClearGoods = function() {
+    Application.onClearGoods = function(evt) {
         console.log("Clear");
 
+        $('#goods-container').empty();
+        Application.init(document);
 
     };
 
 
     $(function () {
         $(_document).on('change', 'input:checkbox', function () {
-            var input = $(this).next('input');
+            var input = $(this).next('label');
             if (this.checked) {
                 $(input).css('textDecoration', 'line-through');
+                $(input).css('opacity', '0.5');
             } else {
                 $(input).css('textDecoration', 'none');
+                $(input).css('opacity', '1');
             }
         })
     });
 
+
     $(function () {
-        $(_document).on('dblclick', 'input:text', function () {
-            var input = $(this);
-                $(input).removeAttr("readonly");
-            console.log("double click");
+        $(_document).on('dblclick', 'label', function () {
+            var title = $(this).html(),
+                curId = $(this).attr('data-goods-id'),
+                label = $('<label data-goods-id="' + curId + '" ></label>'),
+                input = $('<input type="text" data-goods-id="' + curId + '"></input>').attr({ value: title, id:'currentInput'});
+
+            $(this).replaceWith(input);
+
+            $('input').keyup(function(e){
+                if ($(this).attr('id')!== "inputTxt") {
+                    if(e.which === 13) {
+                        title = currentInput.value;
+                        label.text(title + " ");
+                        $(this).replaceWith(label);
+                    } else if (e.which === 27) {
+                        label.text(title);
+                        $(this).replaceWith(label);
+                    }
+                };
+            });
+
         })
     });
 
