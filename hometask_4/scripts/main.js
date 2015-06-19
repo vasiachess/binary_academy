@@ -104,11 +104,29 @@ var Application = {};
         })
     });
 
+
+    $(function () {
+        $(_document).on('focusout', 'input:text', function () {
+            var title = currentInput.value,
+                curId = $(this).attr('data-goods-id'),
+                label = $('<label data-goods-id="' + curId + '" ></label>'),
+                btn = $(this).next('button');
+                input = $('<input type="text" data-goods-id="' + curId + '"></input>').attr({ value: title, id:'currentInput'});
+
+            if ($(this).attr('id')!== "inputTxt") {
+                label.text(title);
+                $(this).replaceWith(label);
+                $(btn).css('visibility', 'hidden');
+            }
+        })
+    });
+
+
     $(function () {
         $(_document).on('mouseout', 'label', function () {
             var btn = $(this).next('button');
             console.log("Hide button");
-            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 1000);
+            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 500);
         })
     });
 
@@ -120,6 +138,7 @@ var Application = {};
                 input = $('<input type="text" data-goods-id="' + curId + '"></input>').attr({ value: title, id:'currentInput'});
 
             $(this).replaceWith(input);
+            input.focus();
 
             $('input').keyup(function(e){
                 if ($(this).attr('id')!== "inputTxt") {
@@ -131,7 +150,7 @@ var Application = {};
                         label.text(title);
                         $(this).replaceWith(label);
                     }
-                };
+                }
             });
 
         })
