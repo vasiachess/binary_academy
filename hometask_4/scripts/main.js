@@ -126,7 +126,7 @@ var Application = {};
         $(_document).on('mouseout', 'label', function () {
             var btn = $(this).next('button');
             console.log("Hide button");
-            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 500);
+            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 1000);
         })
     });
 
