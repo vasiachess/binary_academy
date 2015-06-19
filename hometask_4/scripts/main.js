@@ -56,6 +56,7 @@ var Application = {};
             $newGoods = $('<ul id="' + id + '"></ul>'),
             $labelNew = $('<label data-goods-id:"' + id + '"/>'),
             $inputCheckBox =$('<input type="checkbox" data-action="Check" data-goods-id="' + id + '"></input>');
+            $deleteButton =$('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
 
         $labelNew.text(inputTxt.value + " ");
 
@@ -63,7 +64,7 @@ var Application = {};
 
         $newGoods.append($inputCheckBox);
         $newGoods.append($labelNew);
-        $newGoods.append('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
+        $newGoods.append($deleteButton.css('visibility', 'hidden'));
 
         $baseNode.append($newGoods);
 
@@ -95,6 +96,21 @@ var Application = {};
         })
     });
 
+    $(function () {
+        $(_document).on('mouseover', 'label', function () {
+            var btn = $(this).next('button');
+            console.log("Hide button");
+                $(btn).css('visibility', 'visible');
+        })
+    });
+
+    $(function () {
+        $(_document).on('mouseout', 'label', function () {
+            var btn = $(this).next('button');
+            console.log("Hide button");
+            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 1000);
+        })
+    });
 
     $(function () {
         $(_document).on('dblclick', 'label', function () {
