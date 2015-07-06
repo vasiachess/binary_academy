@@ -4,7 +4,7 @@ var Application = {};
     var
         _document,
         _$container;
-        id = 0;
+    id = 0;
 
     Application.init = function(document) {
         _document = document;
@@ -53,10 +53,10 @@ var Application = {};
     Application.onAddGoods = function($baseNode) {
 
         var id = this.nextId();
-            $newGoods = $('<ul id="' + id + '"></ul>'),
+        $newGoods = $('<ul id="' + id + '"></ul>'),
             $labelNew = $('<label data-goods-id:"' + id + '"/>'),
             $inputCheckBox =$('<input type="checkbox" data-action="Check" data-goods-id="' + id + '"></input>');
-            $deleteButton =$('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
+        $deleteButton =$('<button data-action="DeleteGoods" data-goods-id="' + id + '">x</button>');
 
         $labelNew.text(inputTxt.value + " ");
 
@@ -100,7 +100,7 @@ var Application = {};
         $(_document).on('mouseover', 'label', function () {
             var btn = $(this).next('button');
             console.log("Hide button");
-                $(btn).css('visibility', 'visible');
+            $(btn).css('visibility', 'visible');
         })
     });
 
@@ -111,7 +111,7 @@ var Application = {};
                 curId = $(this).attr('data-goods-id'),
                 label = $('<label data-goods-id="' + curId + '" ></label>'),
                 btn = $(this).next('button');
-                input = $('<input type="text" data-goods-id="' + curId + '"></input>').attr({ value: title, id:'currentInput'});
+            input = $('<input type="text" data-goods-id="' + curId + '"></input>').attr({ value: title, id:'currentInput'});
 
             if ($(this).attr('id')!== "inputTxt") {
                 label.text(title);
@@ -126,7 +126,8 @@ var Application = {};
         $(_document).on('mouseout', 'label', function () {
             var btn = $(this).next('button');
             console.log("Hide button");
-            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 1000);
+            -            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 500);
+            +            setTimeout( function() {$(btn).css('visibility', 'hidden');}, 1000);
         })
     });
 
@@ -165,4 +166,3 @@ var Application = {};
     };
 
 })(Application, jQuery);
-
