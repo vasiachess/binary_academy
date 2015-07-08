@@ -68,6 +68,14 @@ ul {
     margin:20px;
 }
 
+.block2:after {
+    height:50px;
+    content: " ";
+    border-right:5px solid red;
+    padding: 10px;
+    margin:20px
+}
+
 .block1 {
     width:100px;
     display: inline-block;
