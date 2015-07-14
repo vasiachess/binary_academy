@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+	<script src="scripts/app.js"></script>
+<head/>
+<body>
+
+<div ng-controler='firstController'>
+
+
+	<div class="goods-list">
+
+		<input type="text" ng-model='text.name'>
+		<div ng-repeat='item in goods'>
+		<h2>{{item.name}}</h2>
+		<h3>{{item.price}}</h3>
+	</div>
+
+	</div>
+<button ng-click='toogleView()'>View Goods</button>
+
+</div>
+<body/>
+<html/>
