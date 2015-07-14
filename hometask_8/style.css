@@ -25,3 +25,7 @@ h4 {
     display: inline-block;
     margin:2px;
 }
+
+button {
+    margin-left:20px;
+}
