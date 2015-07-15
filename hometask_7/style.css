@@ -1,0 +1,21 @@
+.title {
+    margin:0px;
+    text-align: left;
+    background: lightblue;
+}
+
+
+.head {
+    display: inline-block;
+    list-style: none;
+    vertical-align: middle;
+}
+
+footer {
+  clear: both;
+  overflow: hidden;
+  height: 50px;
+  background: lightgrey;
+  text-align: center;
+  line-height: 50px;
+}
