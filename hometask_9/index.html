@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html ng-app="app">
+<head>
+<meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="container" ng-controller="MyController as main">
+    <div id="thumbnail" ng-repeat="photo in main.photos">
+        <div display-full photo="photo"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="scripts/app.module.js"></script>
+<script type="text/javascript" src="scripts/imageResource.js"></script>
+<script type="text/javascript" src="scripts/services.js"></script>
+<script type="text/javascript" src="scripts/myController.js"></script>
+</html>
