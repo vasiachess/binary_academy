@@ -5,7 +5,7 @@ body {
 #thumbnail {
 	text-align: center;
 	width: 150px;
-	margin: 0 auto;
+	margin: 30px auto;
 }
 
 .background{
@@ -16,6 +16,11 @@ body {
 	text-align: center;
 	top: 0;
 	left: 0;
+}
+
+.title {
+    font-size: large;
+    color: blue;
 }
 
 .fullScreenImage {

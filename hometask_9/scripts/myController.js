@@ -1,43 +1,38 @@
 angular
 	.module('app')
 	.controller('MyController', MyController)
-	.directive('displayFull', displayFull);
+	.directive('displayImg', displayImg);
 
-function MyController (imageRes, imageService) {
+function MyController (imageResService, imageService) {
 	var vm = this;
 
 	vm.photos = imageService.getPhotos();
+
 }
 
-function displayFull () {
+function displayImg () {
 	return {
 		replace: true,
-		scope: {
-			photo: "="
-		},
 		restrict: "A",
 		link: function(scope,element,attrs){
 			var currentElement = element[0].addEventListener("click", function (e){
-				var back = document.createElement('div');
-				var imgFull = document.createElement('img');
+				var background = document.createElement('div');
+				var fullScreenImg = document.createElement('img');
 
-				document.body.style.overflow = "hidden"
-				document.body.appendChild(back);
+				document.body.appendChild(background);
+                fullScreenImg.src = scope.photo.url;
+				fullScreenImg.className = 'fullScreenImage';
 
-				imgFull.src = scope.photo.url;
-				imgFull.className = 'fullScreenImage';
-
-				back.className = 'background';
-				back.appendChild(imgFull);
-				back.addEventListener("click", function (e){
-					document.body.style.overflow = "scroll"
-					back.parentNode.removeChild(back);
+				background.className = 'background';
+				background.appendChild(fullScreenImg);
+				background.addEventListener("click", function (e){
+					background.parentNode.removeChild(background);
 				});
 			});
 		},
 		template:
-		"<div><img ng-src='{{photo.thumbnailUrl}}'>" +
-		"<div>{{photo.title}}</div></div>"
+		"<div class='title'>{{photo.title}}" +
+		"<div><img ng-src='{{photo.thumbnailUrl}}'></div></div>"
 	}
 }
 	
