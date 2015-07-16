@@ -1,6 +1,5 @@
-angular
-    .module('app')
-    .factory('photosService', photosService)
+angular.module('app')
+        .factory('photosService', photosService)
 
 function photosService($http) {
     var photos = {}

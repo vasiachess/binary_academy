@@ -6,7 +6,6 @@ angular
 function MyController (Photos,photosService) {
 	var vm = this;
 
-	//vm.photos = photosService.getPhotos();
 	vm.photos = Photos.getPhotos();
 }
 
