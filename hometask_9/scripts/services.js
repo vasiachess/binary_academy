@@ -1,7 +1,8 @@
 angular.module('app')
-        .factory('photosService', photosService)
+        .factory('imageService', imageService)
+        .factory('imageRes', imageRes)
 
-function photosService($http) {
+function imageService($http) {
     var photos = {}
 
     photos.getPhotos = function () {
@@ -15,4 +16,21 @@ function photosService($http) {
         return phs;
     }
     return photos;
+}
+
+function imageRes ($resource) {
+
+    return {
+        getPhotos: function() {
+            var photos = [];
+
+            $resource('http://jsonplaceholder.typicode.com/photos').query(function (res) {
+                for (prop in res){
+                    photos.push(res[prop]);
+                    if (res[prop].id == 7) break;
+                }
+            });
+            return photos;
+        }
+    }
 }

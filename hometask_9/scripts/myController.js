@@ -3,10 +3,10 @@ angular
 	.controller('MyController', MyController)
 	.directive('displayFull', displayFull);
 
-function MyController (Photos,photosService) {
+function MyController (imageRes, imageService) {
 	var vm = this;
 
-	vm.photos = Photos.getPhotos();
+	vm.photos = imageService.getPhotos();
 }
 
 function displayFull () {
